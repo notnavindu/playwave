@@ -1,8 +1,20 @@
-export const getUsersPlaylists = async (refresh_token: string) => {
-  const { access_token } = await getAccessToken(refresh_token);
-  return fetch(PLAYLISTS_ENDPOINT, {
+import axios from "axios";
+
+export const getPlayerState = async (token: string) => {
+  return await axios.get("https://api.spotify.com/v1/me/player", {
     headers: {
-      Authorization: `Bearer ${access_token}`,
+      Authorization: "Bearer " + token,
     },
   });
+};
+
+export const getCurrentlyPlaying = async (token: string) => {
+  return await axios.get(
+    "https://api.spotify.com/v1/me/player/currently-playing",
+    {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    }
+  );
 };
