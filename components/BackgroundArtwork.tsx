@@ -11,14 +11,13 @@ const BackgroundArtwork = (props: Props) => {
   const controls = useAnimation();
 
   useEffect(() => {
-    console.log("State change");
     if (isPlaying) {
       controls.start(
         {
           rotate: [0, 360],
         },
         {
-          duration: 2,
+          duration: 12,
           repeat: Infinity,
           repeatType: "loop",
           ease: "linear",
@@ -38,7 +37,7 @@ const BackgroundArtwork = (props: Props) => {
         <>
           <motion.div animate={controls}>
             <img
-              className={`w-[500px] h-[500px] rounded-md`}
+              className={`w-[500px] h-[500px] rounded-3xl`}
               src={`${item?.album.images[0].url}`}
             />
           </motion.div>

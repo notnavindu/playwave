@@ -35,9 +35,7 @@ const PlayerCard = (props: Props) => {
                         shadow-inner overflow-hidden transform-gpu rounded-xl flex flex-col"
         >
           <div className="relative">
-            <AnimatePresence>
-              <AlbumArt imageUrl={item.album.images[0].url} />
-            </AnimatePresence>
+            <AlbumArt imageUrl={item.album.images[0].url} />
           </div>
 
           <div className="px-4 mb-auto">

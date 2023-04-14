@@ -1,5 +1,5 @@
 import { Song } from "lib/types/song";
-import { changePlayState } from "lib/utils/spotify.util";
+import { changePlayState, getCurrentlyPlaying } from "lib/utils/spotify.util";
 import { create } from "zustand";
 
 interface PlayerState {

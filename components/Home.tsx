@@ -11,35 +11,37 @@ type Props = {};
 function Home({}: Props) {
   const { data: session } = useSession();
 
-  const { item, setItem } = usePlayerStore((state) => ({
-    item: state.item,
-    setItem: state.setItem,
-  }));
-
+  const setItem = usePlayerStore((state) => state.setItem);
   const setIsPlaying = usePlayerStore((state) => state.setIsPlaying);
 
   const userEmail = session?.user?.email;
 
   // const test = usePlayer(session?.user?.accessToken as string);
 
-  useEffect(() => {
-    if (session?.user?.accessToken) {
-      getCurrentlyPlaying(session?.user.accessToken).then(({ data }) => {
-        console.log("Playi8ng: ", data);
-        setItem(data?.item);
-        setIsPlaying(data?.is_playing);
-      });
-    }
-  }, [session]);
-
-  const [seconds, setSeconds] = useState(0);
-
   // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setSeconds((seconds) => seconds + 1);
-  //   }, 1000);
-  //   return () => clearInterval(interval);
-  // }, []);
+  //   if (session?.user?.accessToken) {
+  //     getCurrentlyPlaying(session?.user.accessToken).then(({ data }) => {
+  //       console.log("Playi8ng: ", data);
+  //       setItem(data?.item);
+  //       setIsPlaying(data?.is_playing);
+  //     });
+  //   }
+  // }, [session]);
+
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      if (session?.user?.accessToken) {
+        await getCurrentlyPlaying(session?.user.accessToken).then(
+          ({ data }) => {
+            setItem(data?.item);
+            setIsPlaying(data?.is_playing);
+          }
+        );
+      }
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="relative">
@@ -49,7 +51,7 @@ function Home({}: Props) {
       Playing: {item?.name}
       <button onClick={() => signOut()}>Sign out</button> */}
       <button onClick={() => signOut()}>Sign out</button>
-      {seconds}
+
       <BackgroundArtwork />
 
       <PlayerCard />

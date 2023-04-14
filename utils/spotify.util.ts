@@ -30,3 +30,27 @@ export const changePlayState = async (token: string, state: boolean) => {
     }
   );
 };
+
+export const nextSong = async (token: string) => {
+  return await axios.post(
+    `https://api.spotify.com/v1/me/player/next`,
+    {},
+    {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    }
+  );
+};
+
+export const previousSong = async (token: string) => {
+  return await axios.post(
+    `https://api.spotify.com/v1/me/player/previous`,
+    {},
+    {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    }
+  );
+};
