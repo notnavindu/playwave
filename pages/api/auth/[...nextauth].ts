@@ -10,7 +10,7 @@ export const authOptions: AuthOptions = {
       clientId: process.env.SPOTIFY_CLIENT_ID as string,
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET as string,
       authorization:
-        "https://accounts.spotify.com/authorize?scope=user-read-email,user-read-playback-state",
+        "https://accounts.spotify.com/authorize?scope=user-read-email,user-read-playback-state,user-modify-playback-state",
     }),
 
     // ...add more providers here

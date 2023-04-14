@@ -18,3 +18,15 @@ export const getCurrentlyPlaying = async (token: string) => {
     }
   );
 };
+
+export const changePlayState = async (token: string, state: boolean) => {
+  return await axios.put(
+    `https://api.spotify.com/v1/me/player/${state ? "play" : "pause"}`,
+    {},
+    {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    }
+  );
+};
