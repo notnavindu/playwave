@@ -3,8 +3,8 @@ import { getToken } from "next-auth/jwt";
 import { useEffect } from "react";
 // import { getUserQueue } from "lib/lib/utils/spotify.util";
 import axios from "axios";
-import { usePlayer } from "lib/lib/hooks/usePlayer";
-import Home from "lib/lib/pages/Home";
+import { usePlayer } from "lib/hooks/usePlayer";
+import Home from "lib/components/Home";
 
 export default function CamperVanPage() {
   const { data: session, status } = useSession();
