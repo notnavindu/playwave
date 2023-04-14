@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Song } from "lib/types/song";
 
 export const getPlayerState = async (token: string) => {
   return await axios.get("https://api.spotify.com/v1/me/player", {
@@ -53,4 +54,24 @@ export const previousSong = async (token: string) => {
       },
     }
   );
+};
+
+export const searchSong = async (token: string, query: string) => {
+  return (
+    await axios.get(
+      `https://api.spotify.com/v1/search`,
+
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+
+        params: {
+          q: query,
+          type: "track",
+          limit: 5,
+        },
+      }
+    )
+  ).data?.tracks?.items as Song[];
 };
