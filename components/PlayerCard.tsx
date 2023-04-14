@@ -1,10 +1,16 @@
 import { usePlayerStore } from "lib/stores/usePlayerStore";
 import React, { useEffect } from "react";
-import ColorThief from "colorthief";
+
 import MusicControls from "./MusicControls";
-import { motion, useAnimation } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import AlbumArt from "./PlayerCard/AlbumArt";
 
 type Props = {};
+
+const variants = {
+  playing: { scale: 1 },
+  paused: { scale: 0.97 },
+};
 
 const PlayerCard = (props: Props) => {
   const { item, isPlaying } = usePlayerStore((state) => ({
@@ -12,17 +18,7 @@ const PlayerCard = (props: Props) => {
     isPlaying: state.isPlaying,
   }));
 
-  const { primaryColor, setPrimaryColor } = usePlayerStore((state) => ({
-    primaryColor: state.primaryColor,
-    setPrimaryColor: state.setPrimaryColor,
-  }));
-
-  const calculateColor = (event: any) => {
-    const colorThief = new ColorThief();
-    const colors = colorThief.getColor(event.target);
-
-    setPrimaryColor(`rgb(${colors.join(",")})`);
-  };
+  const primaryColor = usePlayerStore((state) => state.primaryColor);
 
   if (item) {
     return (
@@ -31,41 +27,52 @@ const PlayerCard = (props: Props) => {
         transition-all duration-1000
         ${isPlaying ? "grayscale-0" : "grayscale"}`}
       >
-        <div
-          className="w-80 h-[500px] bg-white bg-opacity-10 backdrop-blur-2xl border border-white border-opacity-10
-                        shadow-2xl overflow-hidden transform-gpu rounded-xl flex flex-col"
+        <motion.div
+          animate={isPlaying ? "playing" : "paused"}
+          transition={{ duration: 1 }}
+          variants={variants}
+          className="w-80 h-[500px] bg-white bg-opacity-5 backdrop-blur-2xl border border-white border-opacity-10
+                        shadow-inner overflow-hidden transform-gpu rounded-xl flex flex-col"
         >
           <div className="relative">
-            <img
-              className="w-full aspect-square rounded-[28px] z-10 p-4 drop-shadow-sm"
-              src={`${item?.album.images[0].url}`}
-              onLoad={calculateColor}
-              crossOrigin="anonymous"
-            />
-            <img
-              className="absolute top-0 w-full aspect-square -z-10 blur-2xl brightness-200 "
-              src={`${item?.album.images[0].url}`}
-            />
+            <AnimatePresence>
+              <AlbumArt imageUrl={item.album.images[0].url} />
+            </AnimatePresence>
           </div>
 
           <div className="px-4 mb-auto">
-            <div className="text-lg opacity-90">{item.name}</div>
+            <div className="text-lg opacity-90 drop-shadow-md">{item.name}</div>
             <div
-              className="text-sm brightness-200 drop-shadow-md"
+              className="text-sm  drop-shadow-sm"
               style={{ color: primaryColor }}
             >
               {item.artists[0].name}
             </div>
           </div>
 
-          <div className="w-full h-16">
+          <div className="w-full mb-4">
             <MusicControls />
           </div>
-        </div>
+        </motion.div>
       </div>
     );
   } else {
-    return <></>;
+    return (
+      <>
+        <div
+          className={`fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 overflow-hidden transform-gpu`}
+        >
+          <div
+            className="w-80 h-[500px] bg-white bg-opacity-5 backdrop-blur-2xl border border-white border-opacity-10
+                        flex items-center justify-center text-center text-lg"
+          >
+            <div className="opacity-50">
+              Play a song on <br /> one of your devices....
+            </div>
+          </div>
+        </div>
+      </>
+    );
   }
 };
 
