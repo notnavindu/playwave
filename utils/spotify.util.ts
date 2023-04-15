@@ -1,77 +1,38 @@
-import axios from "axios";
 import { Song } from "lib/types/song";
+import { api } from "./api.util";
 
 export const getPlayerState = async (token: string) => {
-  return await axios.get("https://api.spotify.com/v1/me/player", {
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  });
+  return await api(token).get("/me/player");
 };
 
 export const getCurrentlyPlaying = async (token: string) => {
-  return await axios.get(
-    "https://api.spotify.com/v1/me/player/currently-playing",
-    {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    }
-  );
+  return await api(token).get("/me/player/currently-playing");
 };
 
 export const changePlayState = async (token: string, state: boolean) => {
-  return await axios.put(
-    `https://api.spotify.com/v1/me/player/${state ? "play" : "pause"}`,
-    {},
-    {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    }
-  );
+  return await api(token).put(`/me/player/${state ? "play" : "pause"}`);
 };
 
 export const nextSong = async (token: string) => {
-  return await axios.post(
-    `https://api.spotify.com/v1/me/player/next`,
-    {},
-    {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    }
-  );
+  return await api(token).post(`/me/player/next`);
+};
+
+export const switchSong = async (token: string, songId: string) => {
+  return await api(token).put(`/me/player/play`, { uris: [songId] });
 };
 
 export const previousSong = async (token: string) => {
-  return await axios.post(
-    `https://api.spotify.com/v1/me/player/previous`,
-    {},
-    {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    }
-  );
+  return await api(token).post(`/me/player/previous`);
 };
 
 export const searchSong = async (token: string, query: string) => {
   return (
-    await axios.get(
-      `https://api.spotify.com/v1/search`,
-
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-
-        params: {
-          q: query,
-          type: "track",
-          limit: 5,
-        },
-      }
-    )
+    await api(token).get(`/search`, {
+      params: {
+        q: query,
+        type: "track",
+        limit: 5,
+      },
+    })
   ).data?.tracks?.items as Song[];
 };

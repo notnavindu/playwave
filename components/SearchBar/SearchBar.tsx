@@ -1,5 +1,5 @@
 import { Song } from "lib/types/song";
-import { searchSong } from "lib/utils/spotify.util";
+import { searchSong, switchSong } from "lib/utils/spotify.util";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence, stagger } from "framer-motion";
@@ -39,6 +39,7 @@ function SearchBar({ onClose }: Props) {
         ></div>
 
         <input
+          autoFocus
           onKeyUp={handleKeyUp}
           onChange={(e) => setSearchQuery(e.target.value)}
           style={{ maxWidth: "600px" }}
@@ -57,8 +58,12 @@ function SearchBar({ onClose }: Props) {
               <li
                 key={track.id}
                 style={{ maxWidth: "600px" }}
+                onClick={() => {
+                  switchSong(session?.user.accessToken!, track.uri);
+                  onClose();
+                }}
                 className="w-full py-2 bg-white/10 border-2 border-white shadow-2xl border-opacity-5 backdrop-blur-xl  rounded-md transform-gpu
-                        px-3 text-white/75 opacity-0 backdrop-brightness-75 flex items-center gap-4"
+                        px-3 text-white/75 opacity-0 backdrop-brightness-75 flex items-center gap-4 hover:bg-white/[0.15] cursor-pointer"
               >
                 <div>
                   <img src={track.album.images[2].url} />

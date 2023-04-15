@@ -37,8 +37,8 @@ function Home({}: Props) {
 
   return (
     <div className="relative">
-      <div className="sticky w-full flex justify-between">
-        <div className="p-5">Playwave</div>
+      <div className="sticky w-full flex justify-between z-50">
+        <div className="p-5">Playwave ⤳</div>
         <div className="p-5" onClick={() => setSearchOpen(!searchOpen)}>
           <BsSearch />
         </div>

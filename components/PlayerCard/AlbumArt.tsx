@@ -27,9 +27,9 @@ const AlbumArt = (props: Props) => {
           onLoad={calculateColor}
           crossOrigin="anonymous"
           key={props.imageUrl}
-          initial={{ x: 200, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ ease: "easeIn" }}
+          initial={{ x: 200 }}
+          animate={{ x: 0 }}
+          transition={{ ease: "easeOut" }}
         />
         <img
           className="absolute top-0 w-full aspect-square -z-10 blur-2xl brightness-200 "
