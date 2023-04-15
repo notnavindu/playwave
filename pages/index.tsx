@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { usePlayer } from "lib/hooks/usePlayer";
 import Home from "lib/components/Home";
+import LoginPage from "lib/components/auth/LoginPage";
 
 export default function CamperVanPage() {
   const { data: session, status } = useSession();
@@ -30,8 +31,7 @@ export default function CamperVanPage() {
 
   return (
     <>
-      <p>Not signed in.</p>
-      <button onClick={() => signIn("spotify")}>Sign in</button>
+      <LoginPage />
     </>
   );
 }

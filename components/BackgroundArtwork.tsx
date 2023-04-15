@@ -30,18 +30,18 @@ const BackgroundArtwork = (props: Props) => {
 
   return (
     <div
-      className={`fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-0 blur-[100px] transform-gpu 
-      transition-all duration-1000 ${isPlaying ? "grayscale-0" : "grayscale"} `}
+      className={`w-full h-screen  flex items-center justify-center fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-0 
+      blur-[100px] transform-gpu transition-all duration-1000 ${
+        isPlaying ? "grayscale-0" : "grayscale"
+      } `}
     >
       {item && (
-        <>
-          <motion.div animate={controls}>
-            <img
-              className={`w-[500px] h-[500px] rounded-3xl`}
-              src={`${item?.album.images[0].url}`}
-            />
-          </motion.div>
-        </>
+        <motion.div className=" w-fit" animate={controls}>
+          <img
+            className={`w-[600px] aspect-square rounded-full`}
+            src={`${item?.album.images[2].url}`}
+          />
+        </motion.div>
       )}
     </div>
   );

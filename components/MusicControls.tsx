@@ -42,7 +42,7 @@ const MusicControls = (props: Props) => {
 
   return (
     <div className="w-full flex items-center justify-center gap-3">
-      <button className="w-12 h-12 flex items-center justify-center active:scale-75 transition-transform duration-500 hover:scale-110">
+      <button className="w-12 h-12 flex items-center justify-center active:scale-75 transition-transform duration-1500 hover:scale-125">
         <MdNavigateBefore
           onClick={playPrev}
           className="opacity-50 drop-shadow-sm"
@@ -50,7 +50,7 @@ const MusicControls = (props: Props) => {
         />
       </button>
 
-      <button className="active:scale-75 transition-transform duration-500 hover:scale-110">
+      <button className="active:scale-75 transition-transform duration-200 hover:scale-110">
         {isPlaying ? (
           <HiPause
             color={"#ffffff"}
@@ -68,7 +68,7 @@ const MusicControls = (props: Props) => {
         )}
       </button>
 
-      <button className="w-12 h-12 flex items-center justify-center active:scale-75 transition-transform duration-500 hover:scale-110">
+      <button className="w-12 h-12 flex items-center justify-center active:scale-75 transition-transform duration-100 hover:scale-125">
         <MdNavigateNext
           onClick={playNext}
           className="opacity-50 drop-shadow-sm"

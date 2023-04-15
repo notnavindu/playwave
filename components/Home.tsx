@@ -44,27 +44,20 @@ function Home({}: Props) {
         </div>
       </div>
 
-      {/* <p>Signed in as {userEmail}</p>
-      <p>{session?.user?.accessToken}</p>
-      <br />
-      Playing: {item?.name}
-      <button onClick={() => signOut()}>Sign out</button> */}
-
-      {/* {searchOpen && <SearchBar />} */}
-
-      {/* TODO: Use framer to animate here */}
       <AnimatePresence>
         {searchOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className={`${
-              searchOpen ? "backdrop-blur-lg" : "backdrop-blur-0"
-            } w-full h-screen z-30 fixed opacity-0 bg-black bg-opacity-10 transform-gpu transition-all duration-500`}
-          >
-            <SearchBar />
-          </motion.div>
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className={`${
+                searchOpen ? "backdrop-blur-lg" : "backdrop-blur-0"
+              } w-full h-screen z-30 fixed opacity-0 bg-black bg-opacity-20 transform-gpu transition-all duration-500`}
+            >
+              <SearchBar onClose={() => setSearchOpen(false)} />
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
 

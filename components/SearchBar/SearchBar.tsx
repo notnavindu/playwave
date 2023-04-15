@@ -5,9 +5,11 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence, stagger } from "framer-motion";
 import { useAnimate } from "framer-motion";
 
-type Props = {};
+type Props = {
+  onClose: () => void;
+};
 
-function SearchBar({}: Props) {
+function SearchBar({ onClose }: Props) {
   const { data: session } = useSession();
   const [searchQuery, setSearchQuery] = useState("");
   const [results, setResults] = useState<Song[]>([]);
@@ -30,14 +32,19 @@ function SearchBar({}: Props) {
 
   return (
     <>
-      <div className="w-full h-auto top-48 fixed z-40 flex items-center justify-center flex-col p-2">
+      <div className="w-full h-auto top-24 z-40 flex items-center justify-center flex-col p-2 relative">
+        <div
+          className="w-full h-screen z-0 fixed   bg-opacity-10"
+          onClick={onClose}
+        ></div>
+
         <input
           onKeyUp={handleKeyUp}
           onChange={(e) => setSearchQuery(e.target.value)}
           style={{ maxWidth: "600px" }}
           value={searchQuery}
           placeholder="Search for a song..."
-          className="w-full h-16 bg-white bg-opacity-5 border-2 border-white shadow-2xl border-opacity-5 backdrop-blur-xl  rounded-md transform-gpu
+          className="w-full h-16 bg-white/10 border-2 border-white shadow-2xl border-opacity-5 backdrop-blur-xl  rounded-md transform-gpu
                         outline-none px-3 text-white/75 backdrop-brightness-75"
         />
 
@@ -50,7 +57,7 @@ function SearchBar({}: Props) {
               <li
                 key={track.id}
                 style={{ maxWidth: "600px" }}
-                className="w-full py-2 bg-white/2 border-2 border-white shadow-2xl border-opacity-5 backdrop-blur-xl  rounded-md transform-gpu
+                className="w-full py-2 bg-white/10 border-2 border-white shadow-2xl border-opacity-5 backdrop-blur-xl  rounded-md transform-gpu
                         px-3 text-white/75 opacity-0 backdrop-brightness-75 flex items-center gap-4"
               >
                 <div>

@@ -7,7 +7,9 @@ type Props = {
 
 function Layout({ children, className = "" }: Props) {
   return (
-    <main className={`w-full min-h-screen bg-black text-white ${className}`}>
+    <main
+      className={`w-full min-h-screen bg-black text-white antialiased ${className}`}
+    >
       {children}
     </main>
   );
