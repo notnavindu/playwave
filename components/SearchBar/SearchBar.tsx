@@ -1,7 +1,7 @@
 import { Song } from "lib/types/song";
 import { searchSong } from "lib/utils/spotify.util";
 import { useSession } from "next-auth/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence, stagger } from "framer-motion";
 import { useAnimate } from "framer-motion";
 
@@ -21,6 +21,12 @@ function SearchBar({}: Props) {
       setSearchQuery("");
     }
   };
+
+  useEffect(() => {
+    if (results.length > 0) {
+      animate("li", { y: [-50, 0], opacity: 1 }, { delay: stagger(0.05) });
+    }
+  }, [results]);
 
   return (
     <>
@@ -45,7 +51,7 @@ function SearchBar({}: Props) {
                 key={track.id}
                 style={{ maxWidth: "600px" }}
                 className="w-full py-2 bg-white/2 border-2 border-white shadow-2xl border-opacity-5 backdrop-blur-xl  rounded-md transform-gpu
-                        px-3 text-white/75 backdrop-brightness-75 flex flex-col justify-center"
+                        px-3 text-white/75 opacity-0 backdrop-brightness-75 flex flex-col justify-center"
               >
                 <div>{track.name}</div>
                 <div className="text-xs opacity-70 mt-1">
