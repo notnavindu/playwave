@@ -14,7 +14,7 @@ const BackgroundArtwork = (props: Props) => {
     if (isPlaying) {
       controls.start(
         {
-          rotate: [0, 360],
+          rotate: [null, 360],
         },
         {
           duration: 12,

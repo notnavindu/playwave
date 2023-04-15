@@ -51,11 +51,17 @@ function SearchBar({}: Props) {
                 key={track.id}
                 style={{ maxWidth: "600px" }}
                 className="w-full py-2 bg-white/2 border-2 border-white shadow-2xl border-opacity-5 backdrop-blur-xl  rounded-md transform-gpu
-                        px-3 text-white/75 opacity-0 backdrop-brightness-75 flex flex-col justify-center"
+                        px-3 text-white/75 opacity-0 backdrop-brightness-75 flex items-center gap-4"
               >
-                <div>{track.name}</div>
-                <div className="text-xs opacity-70 mt-1">
-                  {track.artists[0].name}
+                <div>
+                  <img src={track.album.images[2].url} />
+                </div>
+
+                <div className="flex flex-col justify-center">
+                  <div>{track.name}</div>
+                  <div className="text-xs opacity-70 mt-1">
+                    {track.artists[0].name}
+                  </div>
                 </div>
               </li>
             ))}

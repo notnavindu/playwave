@@ -8,6 +8,7 @@ import BackgroundArtwork from "./BackgroundArtwork";
 import SearchBar from "./SearchBar/SearchBar";
 import { RxExit } from "react-icons/rx";
 import { BsSearch } from "react-icons/bs";
+import { AnimatePresence, motion } from "framer-motion";
 
 type Props = {};
 
@@ -49,16 +50,23 @@ function Home({}: Props) {
       Playing: {item?.name}
       <button onClick={() => signOut()}>Sign out</button> */}
 
-      {searchOpen && <SearchBar />}
+      {/* {searchOpen && <SearchBar />} */}
 
       {/* TODO: Use framer to animate here */}
-      {searchOpen && (
-        <div
-          className={`${
-            searchOpen ? "backdrop-blur-lg" : "backdrop-blur-0"
-          } w-full h-screen z-30 fixed bg-black bg-opacity-10 transform-gpu transition-all duration-500`}
-        ></div>
-      )}
+      <AnimatePresence>
+        {searchOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className={`${
+              searchOpen ? "backdrop-blur-lg" : "backdrop-blur-0"
+            } w-full h-screen z-30 fixed opacity-0 bg-black bg-opacity-10 transform-gpu transition-all duration-500`}
+          >
+            <SearchBar />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <BackgroundArtwork />
       <PlayerCard />
