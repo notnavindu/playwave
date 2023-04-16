@@ -34,9 +34,8 @@ const StatRing = (props: Props) => {
     const filter = {
       [`target_${props.name}`]: props.value,
       seed_tracks: track?.id,
+      seed_artists: track?.artists[0].id,
     };
-
-    console.log(filter);
 
     const { data } = await getRecommendations(
       session?.user.accessToken!,

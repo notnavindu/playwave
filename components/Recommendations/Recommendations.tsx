@@ -10,7 +10,10 @@ type Props = {
 
 function Recommendations({ onClose }: Props) {
   const { data: session } = useSession();
+
   const tracks = useRecommendationStore((state) => state.tracks);
+  const feature = useRecommendationStore((state) => state.feature);
+  const value = useRecommendationStore((state) => state.value);
 
   const [scope, animate] = useAnimate();
 
@@ -27,6 +30,19 @@ function Recommendations({ onClose }: Props) {
           className="w-full h-screen z-0 fixed   bg-opacity-10"
           onClick={onClose}
         ></div>
+
+        {feature == "all" ? (
+          <div>Similar songs with similar features...</div>
+        ) : (
+          <div>
+            Similar songs with {` `}
+            <span className="text-blue-400">
+              {(Number(value) * 100).toFixed(1)}%
+            </span>
+            {` `}
+            {feature}
+          </div>
+        )}
 
         <ul
           className="w-full mt-4 flex flex-col items-center justify-center gap-1"

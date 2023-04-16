@@ -31,8 +31,6 @@ const AlbumArt = (props: Props) => {
     getAudioFeatures(session?.user.accessToken!, props.itemId).then(
       ({ data }) => {
         setAudioFeatures(data);
-
-        console.log(data);
       }
     );
   }, [props.itemId]);
