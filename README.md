@@ -1,10 +1,11 @@
-# Playwave ⤳
+# Playwave
 
 Playwave is a minimal Spotify clone built as a mini weekend project.
 
 ## Features
 
 - TODO
+-
 
 ## Tech Stack
 
