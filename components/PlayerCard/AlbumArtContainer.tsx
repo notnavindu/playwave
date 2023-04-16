@@ -1,9 +1,12 @@
 import { usePlayerStore } from "lib/stores/usePlayerStore";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ColorThief from "colorthief";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArtworkState } from "lib/types/meta";
 import TrackStats from "./TrackStats";
+import { getAudioFeatures } from "lib/utils/spotify.util";
+import { useSession } from "next-auth/react";
+import { AudioFeatures } from "lib/types/features";
 
 type Props = {
   itemId: string;
@@ -12,6 +15,9 @@ type Props = {
 };
 
 const AlbumArt = (props: Props) => {
+  const { data: session } = useSession();
+
+  const [audioFeatures, setAudioFeatures] = useState<AudioFeatures>();
   const setPrimaryColor = usePlayerStore((state) => state.setPrimaryColor);
 
   const calculateColor = (event: any) => {
@@ -21,7 +27,15 @@ const AlbumArt = (props: Props) => {
     setPrimaryColor(`rgb(${colors.join(",")})`);
   };
 
-  useEffect(() => {}, [props.itemId]);
+  useEffect(() => {
+    getAudioFeatures(session?.user.accessToken!, props.itemId).then(
+      ({ data }) => {
+        setAudioFeatures(data);
+
+        console.log(data);
+      }
+    );
+  }, [props.itemId]);
 
   return (
     <>
@@ -41,12 +55,12 @@ const AlbumArt = (props: Props) => {
         </motion.div>
       ) : (
         <motion.div
-          key={`${props.itemId}`}
+          key={`${props.artworkState}`}
           initial={{ x: 200, opacity: 0, scale: 0.8 }}
           animate={{ x: 0, opacity: 1, scale: 1 }}
           transition={{ ease: "easeOut" }}
         >
-          <TrackStats />
+          <TrackStats features={audioFeatures!} />
         </motion.div>
       )}
 

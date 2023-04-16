@@ -25,6 +25,10 @@ export const previousSong = async (token: string) => {
   return await api(token).post(`/me/player/previous`);
 };
 
+export const getAudioFeatures = async (token: string, id: string) => {
+  return await api(token).get(`/audio-features/${id}`);
+};
+
 export const searchSong = async (token: string, query: string) => {
   return (
     await api(token).get(`/search`, {
