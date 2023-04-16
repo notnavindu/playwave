@@ -1,16 +1,15 @@
-import { signOut, useSession } from "next-auth/react";
-import React, { useEffect, useState } from "react";
-import { usePlayerStore } from "../stores/usePlayerStore";
-import { getCurrentlyPlaying, getPlayerState } from "../utils/spotify.util";
-import { shallow } from "zustand/shallow";
-import PlayerCard from "./PlayerCard";
-import BackgroundArtwork from "./BackgroundArtwork";
-import SearchBar from "./SearchBar/SearchBar";
-import { RxExit } from "react-icons/rx";
-import { BsSearch } from "react-icons/bs";
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
 import { ArtworkState } from "lib/types/meta";
+import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { BsSearch } from "react-icons/bs";
+import { RxExit } from "react-icons/rx";
+import { usePlayerStore } from "../stores/usePlayerStore";
+import { getCurrentlyPlaying } from "../utils/spotify.util";
+import BackgroundArtwork from "./BackgroundArtwork";
+import PlayerCard from "./PlayerCard";
+import SearchBar from "./SearchBar/SearchBar";
 
 type Props = {};
 
@@ -33,7 +32,7 @@ function Home({}: Props) {
           }
         );
       }
-    }, 30000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);

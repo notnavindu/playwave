@@ -1,6 +1,6 @@
+import { motion, useAnimation } from "framer-motion";
 import { usePlayerStore } from "lib/stores/usePlayerStore";
-import React, { useEffect } from "react";
-import { motion, useAnimation, useTransform } from "framer-motion";
+import { useEffect } from "react";
 
 type Props = {};
 

@@ -1,9 +1,8 @@
+import { stagger, useAnimate } from "framer-motion";
 import { Song } from "lib/types/song";
 import { searchSong, switchSong } from "lib/utils/spotify.util";
 import { useSession } from "next-auth/react";
-import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence, stagger } from "framer-motion";
-import { useAnimate } from "framer-motion";
+import { useEffect, useState } from "react";
 
 type Props = {
   onClose: () => void;

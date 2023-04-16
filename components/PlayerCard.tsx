@@ -1,12 +1,10 @@
 import { usePlayerStore } from "lib/stores/usePlayerStore";
-import React, { useEffect } from "react";
 
-import MusicControls from "./MusicControls";
-import { AnimatePresence, motion } from "framer-motion";
-import AlbumArt from "./PlayerCard/AlbumArtContainer";
-import { TiWaves } from "react-icons/ti";
+import { motion } from "framer-motion";
 import { ArtworkState } from "lib/types/meta";
-import TrackStats from "./PlayerCard/TrackStats";
+import { TiWaves } from "react-icons/ti";
+import MusicControls from "./MusicControls";
+import AlbumArt from "./PlayerCard/AlbumArtContainer";
 
 type Props = {
   artworkState: ArtworkState;

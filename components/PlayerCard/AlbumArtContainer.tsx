@@ -1,12 +1,12 @@
-import { usePlayerStore } from "lib/stores/usePlayerStore";
-import React, { useEffect, useState } from "react";
 import ColorThief from "colorthief";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
+import { usePlayerStore } from "lib/stores/usePlayerStore";
+import { AudioFeatures } from "lib/types/features";
 import { ArtworkState } from "lib/types/meta";
-import TrackStats from "./TrackStats";
 import { getAudioFeatures } from "lib/utils/spotify.util";
 import { useSession } from "next-auth/react";
-import { AudioFeatures } from "lib/types/features";
+import { useEffect, useState } from "react";
+import TrackStats from "./TrackStats";
 
 type Props = {
   itemId: string;

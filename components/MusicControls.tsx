@@ -1,15 +1,13 @@
 import { usePlayerStore } from "lib/stores/usePlayerStore";
 import {
-  changePlayState,
   getCurrentlyPlaying,
   nextSong,
   previousSong,
 } from "lib/utils/spotify.util";
 import { useSession } from "next-auth/react";
-import React from "react";
 
 import { HiPause, HiPlay } from "react-icons/hi";
-import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
+import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 
 type Props = {};
 

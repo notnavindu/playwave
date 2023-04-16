@@ -1,6 +1,4 @@
-import axios from "axios";
 import NextAuth, { AuthOptions } from "next-auth";
-import { JWT } from "next-auth/jwt";
 import SpotifyProvider from "next-auth/providers/spotify";
 
 //https://www.youtube.com/watch?v=3xrko3GpYoU

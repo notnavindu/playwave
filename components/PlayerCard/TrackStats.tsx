@@ -1,8 +1,5 @@
-import { usePlayerStore } from "lib/stores/usePlayerStore";
-import React, { useState } from "react";
-import ColorThief from "colorthief";
-import { AnimatePresence, motion } from "framer-motion";
 import { AudioFeatures, FeatureKeys } from "lib/types/features";
+import { useState } from "react";
 import StatRing from "./StatRing";
 
 type Props = {

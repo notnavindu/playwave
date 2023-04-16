@@ -1,5 +1,4 @@
 import { FeatureKeys } from "lib/types/features";
-import React from "react";
 
 type Props = {
   translateX: string;

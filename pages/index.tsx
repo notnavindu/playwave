@@ -7,8 +7,7 @@ export default function Index() {
   const { data: session, status } = useSession();
 
   useEffect(() => {
-    // @ts-ignore
-    if (session?.expired) {
+    if (session?.error === "RefreshAccessTokenError") {
       signIn(); // Force sign in to hopefully resolve error
     }
   }, [session]);
