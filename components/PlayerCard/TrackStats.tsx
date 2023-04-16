@@ -1,6 +1,7 @@
 import { AudioFeatures, FeatureKeys } from "lib/types/features";
 import { useState } from "react";
 import StatRing from "./StatRing";
+import Recommendations from "../Recommendations/Recommendations";
 
 type Props = {
   features: AudioFeatures;
@@ -83,13 +84,6 @@ const TrackStats = (props: Props) => {
                   setActiveRing={setActiveRing}
                   value={props.features["speechiness"]}
                 />
-
-                {/* <div className="border-2 border-red-500 absolute w-16 h-16 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-[5.2rem]"></div>
-                <div className="border-2 border-blue-500 absolute w-16 h-16 rounded-full top-1/2 left-1/2 -translate-x-[5rem] -translate-y-[3.4rem]"></div>
-                <div className="border-2 border-yellow-400 absolute w-16 h-16 rounded-full top-1/2 left-1/2 translate-x-[1rem] -translate-y-[3.4rem]"></div>
-                <div className="border-2 border-green-500 absolute w-16 h-16 rounded-full top-1/2 left-1/2 -translate-x-[5rem] -translate-y-[0.4rem]"></div>
-                <div className="border-2 border-purple-500 absolute w-16 h-16 rounded-full top-1/2 left-1/2 translate-x-[1rem] -translate-y-[0.4rem]"></div>
-                <div className="border-2 border-orange-500 absolute  w-16 h-16 rounded-full top-1/2 left-1/2 -translate-x-1/2 translate-y-[1.2rem]"></div> */}
               </div>
 
               <div className="flex flex-col items-end">

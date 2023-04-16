@@ -10,6 +10,8 @@ import { getCurrentlyPlaying } from "../utils/spotify.util";
 import BackgroundArtwork from "./BackgroundArtwork";
 import PlayerCard from "./PlayerCard";
 import SearchBar from "./SearchBar/SearchBar";
+import { useRecommendationStore } from "lib/stores/useRecommendationStore";
+import Recommendations from "./Recommendations/Recommendations";
 
 type Props = {};
 
@@ -18,6 +20,9 @@ function Home({}: Props) {
 
   const setItem = usePlayerStore((state) => state.setItem);
   const setIsPlaying = usePlayerStore((state) => state.setIsPlaying);
+
+  const recommendations = useRecommendationStore((state) => state.tracks);
+  const resetRecommendations = useRecommendationStore((state) => state.reset);
 
   const [searchOpen, setSearchOpen] = useState(false);
   const [artworkState, setArtworkState] = useState<ArtworkState>("artwork");
@@ -64,9 +69,25 @@ function Home({}: Props) {
             </motion.div>
           </>
         )}
+
+        {recommendations.length > 0 && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className={`${
+                recommendations.length ? "backdrop-blur-lg" : "backdrop-blur-0"
+              } w-full h-screen z-30 fixed opacity-0 bg-black bg-opacity-20 transform-gpu transition-all duration-500`}
+            >
+              <Recommendations onClose={() => resetRecommendations()} />
+            </motion.div>
+          </>
+        )}
       </AnimatePresence>
 
       <BackgroundArtwork />
+
       <PlayerCard
         artworkState={artworkState}
         onWaveClick={() =>

@@ -1,3 +1,4 @@
+import axios from "axios";
 import NextAuth, { AuthOptions } from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
 
@@ -54,26 +55,37 @@ const refreshAccessToken = async (token: any) => {
       refresh_token: token.refreshToken,
     }).toString();
 
-  console.log("URLL", url);
-
-  const response = await fetch(url, {
+  const options = {
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
+      Authorization:
+        "Basic " +
+        Buffer.from(
+          process.env.SPOTIFY_CLIENT_ID! +
+            ":" +
+            process.env.SPOTIFY_CLIENT_SECRET!
+        ).toString("base64"),
     },
-    method: "POST",
-  });
+    form: {
+      grant_type: "refresh_token",
+      refresh_token: token.refreshToken,
+    },
+    json: true,
+  };
 
-  const refreshedTokens = await response.json();
+  console.log("URLL", options);
 
-  if (!response.ok) {
-    throw refreshedTokens;
-  }
+  const { data } = await axios.post(
+    "https://accounts.spotify.com/api/token",
+    options
+  );
+
+  console.log("Fetchedddd", data);
 
   return {
     ...token,
-    accessToken: refreshedTokens.access_token,
-    expires_at: Date.now() + refreshedTokens.expires_in * 1000,
-    refreshToken: refreshedTokens.refresh_token ?? token.refreshToken, // Fall back to old refresh token
+    accessToken: data.access_token,
+    expires_at: Date.now() + data.expires_in * 1000,
+    refreshToken: data.refresh_token ?? token.refreshToken, // Fall back to old refresh token
   };
 };
 

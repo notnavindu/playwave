@@ -40,3 +40,12 @@ export const searchSong = async (token: string, query: string) => {
     })
   ).data?.tracks?.items as Song[];
 };
+
+export const getRecommendations = async (token: string, filter: object) => {
+  return await api(token).get(`/recommendations`, {
+    params: {
+      limit: 5,
+      ...filter,
+    },
+  });
+};
