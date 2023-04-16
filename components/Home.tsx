@@ -33,7 +33,7 @@ function Home({}: Props) {
           }
         );
       }
-    }, 3000);
+    }, 30000);
 
     return () => clearInterval(interval);
   }, []);

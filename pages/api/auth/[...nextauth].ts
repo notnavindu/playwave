@@ -1,4 +1,6 @@
+import axios from "axios";
 import NextAuth, { AuthOptions } from "next-auth";
+import { JWT } from "next-auth/jwt";
 import SpotifyProvider from "next-auth/providers/spotify";
 
 //https://www.youtube.com/watch?v=3xrko3GpYoU
@@ -12,8 +14,6 @@ export const authOptions: AuthOptions = {
       authorization:
         "https://accounts.spotify.com/authorize?scope=user-read-email,user-read-playback-state,user-modify-playback-state",
     }),
-
-    // ...add more providers here
   ],
 
   secret: process.env.NEXTAUTH_SECRET,
@@ -35,12 +35,7 @@ export const authOptions: AuthOptions = {
       }
 
       // Access token has expired, try to update it
-      refreshAccessToken();
-
-      // this is temporary
-      token.expired = true;
-
-      return token;
+      return refreshAccessToken(token);
     },
     async session({ session, token }) {
       session.user = token;
@@ -49,8 +44,39 @@ export const authOptions: AuthOptions = {
   },
 };
 
-const refreshAccessToken = () => {
+const refreshAccessToken = async (token: any) => {
   console.log("TODO: FIX THIS");
+
+  const url =
+    "https://oauth2.googleapis.com/token?" +
+    new URLSearchParams({
+      client_id: process.env.SPOTIFY_CLIENT_ID!,
+      client_secret: process.env.SPOTIFY_CLIENT_SECRET!,
+      grant_type: "refresh_token",
+      refresh_token: token.refreshToken,
+    }).toString();
+
+  console.log("URLL", url);
+
+  const response = await fetch(url, {
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    method: "POST",
+  });
+
+  const refreshedTokens = await response.json();
+
+  if (!response.ok) {
+    throw refreshedTokens;
+  }
+
+  return {
+    ...token,
+    accessToken: refreshedTokens.access_token,
+    expires_at: Date.now() + refreshedTokens.expires_in * 1000,
+    refreshToken: refreshedTokens.refresh_token ?? token.refreshToken, // Fall back to old refresh token
+  };
 };
 
 export default NextAuth(authOptions);

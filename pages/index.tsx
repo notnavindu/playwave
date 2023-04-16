@@ -1,11 +1,7 @@
-import { useSession, signIn, signOut } from "next-auth/react";
-import { getToken } from "next-auth/jwt";
-import { useEffect } from "react";
-// import { getUserQueue } from "lib/lib/utils/spotify.util";
-import axios from "axios";
-import { usePlayer } from "lib/hooks/usePlayer";
 import Home from "lib/components/Home";
 import LoginPage from "lib/components/auth/LoginPage";
+import { signIn, useSession } from "next-auth/react";
+import { useEffect } from "react";
 
 export default function Index() {
   const { data: session, status } = useSession();
