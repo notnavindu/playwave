@@ -3,9 +3,15 @@ import React, { useEffect } from "react";
 
 import MusicControls from "./MusicControls";
 import { AnimatePresence, motion } from "framer-motion";
-import AlbumArt from "./PlayerCard/AlbumArt";
+import AlbumArt from "./PlayerCard/AlbumArtContainer";
+import { TiWaves } from "react-icons/ti";
+import { ArtworkState } from "lib/types/meta";
+import TrackStats from "./PlayerCard/TrackStats";
 
-type Props = {};
+type Props = {
+  artworkState: ArtworkState;
+  onWaveClick: () => void;
+};
 
 const variants = {
   playing: { scale: 1 },
@@ -35,11 +41,20 @@ const PlayerCard = (props: Props) => {
                         shadow-inner overflow-hidden transform-gpu rounded-xl flex flex-col"
         >
           <div className="relative">
-            <AlbumArt imageUrl={item.album.images[0].url} />
+            <AlbumArt
+              imageUrl={item.album.images[0].url}
+              itemId={item.id}
+              artworkState={props.artworkState}
+            />
           </div>
 
           <div className="px-4 mb-auto">
-            <div className="text-lg opacity-90 drop-shadow-md">{item.name}</div>
+            <div className="text-lg opacity-90 drop-shadow-md flex justify-between items-center">
+              <div>{item.name}</div>
+              <div onClick={props.onWaveClick}>
+                <TiWaves size={26} className="opacity-60" />
+              </div>
+            </div>
             <div
               className="text-sm  drop-shadow-sm"
               style={{ color: primaryColor }}

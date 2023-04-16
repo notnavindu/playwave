@@ -7,12 +7,12 @@ import { usePlayer } from "lib/hooks/usePlayer";
 import Home from "lib/components/Home";
 import LoginPage from "lib/components/auth/LoginPage";
 
-export default function CamperVanPage() {
+export default function Index() {
   const { data: session, status } = useSession();
-  const userEmail = session?.user?.email;
 
   useEffect(() => {
-    if (session?.error === "RefreshAccessTokenError") {
+    // @ts-ignore
+    if (session?.expired) {
       signIn(); // Force sign in to hopefully resolve error
     }
   }, [session]);

@@ -9,6 +9,8 @@ import SearchBar from "./SearchBar/SearchBar";
 import { RxExit } from "react-icons/rx";
 import { BsSearch } from "react-icons/bs";
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
+import { ArtworkState } from "lib/types/meta";
 
 type Props = {};
 
@@ -19,6 +21,7 @@ function Home({}: Props) {
   const setIsPlaying = usePlayerStore((state) => state.setIsPlaying);
 
   const [searchOpen, setSearchOpen] = useState(false);
+  const [artworkState, setArtworkState] = useState<ArtworkState>("artwork");
 
   useEffect(() => {
     const interval = setInterval(async () => {
@@ -39,7 +42,10 @@ function Home({}: Props) {
     <div className="relative">
       <div className="sticky w-full flex justify-between z-50">
         <div className="p-5">Playwave ⤳</div>
-        <div className="p-5" onClick={() => setSearchOpen(!searchOpen)}>
+        <div
+          className="p-5 cursor-pointer"
+          onClick={() => setSearchOpen(!searchOpen)}
+        >
           <BsSearch />
         </div>
       </div>
@@ -62,10 +68,19 @@ function Home({}: Props) {
       </AnimatePresence>
 
       <BackgroundArtwork />
-      <PlayerCard />
+      <PlayerCard
+        artworkState={artworkState}
+        onWaveClick={() =>
+          artworkState == "artwork"
+            ? setArtworkState("stats")
+            : setArtworkState("artwork")
+        }
+      />
 
       <div className="fixed w-full flex justify-between bottom-0">
-        <div></div>
+        <div className="p-5">
+          <Image src="/spotify.png" alt="spotify logo" width={79} height={24} />
+        </div>
         <div>
           <button className="p-5" onClick={() => signOut()}>
             <RxExit />

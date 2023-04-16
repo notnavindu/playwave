@@ -24,6 +24,7 @@ export const authOptions: AuthOptions = {
         token.expires_at = (account.expires_at! * 1000) as number;
         token.username = account.providerAccountId;
         token.accessToken = account.access_token;
+        token.refreshToken = account.refresh_token;
 
         return token;
       }
@@ -36,10 +37,12 @@ export const authOptions: AuthOptions = {
       // Access token has expired, try to update it
       refreshAccessToken();
 
+      // this is temporary
+      token.expired = true;
+
       return token;
     },
     async session({ session, token }) {
-      console.log("token>", token);
       session.user = token;
       return session;
     },
