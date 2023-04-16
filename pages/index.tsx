@@ -18,7 +18,7 @@ export default function CamperVanPage() {
   }, [session]);
 
   if (status === "loading") {
-    return <p>Hang on there...</p>;
+    return <p>Hol up...</p>;
   }
 
   if (status === "authenticated") {
