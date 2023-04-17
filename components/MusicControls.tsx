@@ -43,7 +43,7 @@ const MusicControls = (props: Props) => {
       <button className="w-12 h-12 flex items-center justify-center active:scale-75 transition-transform duration-1500 hover:scale-125">
         <MdNavigateBefore
           onClick={playPrev}
-          className="opacity-50 drop-shadow-sm"
+          className="opacity-50 drop-shadow-sm select-none"
           size={28}
         />
       </button>
@@ -53,14 +53,14 @@ const MusicControls = (props: Props) => {
           <HiPause
             color={"#ffffff"}
             size={72}
-            className="opacity-50 drop-shadow-lg"
+            className="opacity-50 drop-shadow-lg select-none"
             onClick={() => pause(session?.user.accessToken!)}
           />
         ) : (
           <HiPlay
             color={"#ffffff"}
             size={72}
-            className="opacity-50"
+            className="opacity-50 select-none"
             onClick={() => play(session?.user.accessToken!)}
           />
         )}
@@ -69,7 +69,7 @@ const MusicControls = (props: Props) => {
       <button className="w-12 h-12 flex items-center justify-center active:scale-75 transition-transform duration-100 hover:scale-125">
         <MdNavigateNext
           onClick={playNext}
-          className="opacity-50 drop-shadow-sm"
+          className="opacity-50 drop-shadow-sm select-none"
           size={28}
         />
       </button>

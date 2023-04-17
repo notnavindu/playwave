@@ -54,7 +54,7 @@ const StatRing = (props: Props) => {
         onMouseEnter={() => props.setActiveRing(props.name)}
         onMouseLeave={() => props.setActiveRing(null)}
         className=" absolute w-16 h-16 rounded-full top-1/2 left-1/2 flex items-center justify-center
-                    transition-all duration-500 group cursor-pointer"
+                    transition-all duration-500 group cursor-pointer select-none"
         style={{
           transform: `translate(${props.translateX}, ${props.translateY})`,
           border: `${getBorderSize(props.value)}px solid ${props.color}`,
