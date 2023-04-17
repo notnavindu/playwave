@@ -44,7 +44,7 @@ export const searchSong = async (token: string, query: string) => {
 export const getRecommendations = async (token: string, filter: object) => {
   return await api(token).get(`/recommendations`, {
     params: {
-      limit: 5,
+      limit: 6,
       ...filter,
     },
   });

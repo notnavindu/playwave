@@ -25,7 +25,7 @@ function Recommendations({ onClose }: Props) {
 
   return (
     <>
-      <div className="w-full h-auto top-14 z-40 flex items-center justify-center flex-col p-2 relative">
+      <div className="w-full h-auto top-8 z-40 flex items-center justify-center flex-col p-2 relative">
         <div
           className="w-full h-screen z-0 fixed   bg-opacity-10"
           onClick={onClose}
