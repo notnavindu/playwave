@@ -38,7 +38,7 @@ const BackgroundArtwork = (props: Props) => {
       {item && (
         <motion.div className=" w-fit" animate={controls}>
           <img
-            className={`w-[400px] aspect-square rounded-[2rem]`}
+            className={`w-[500px] aspect-square rounded-[2rem] brightness-125`}
             src={`${item?.album.images[2].url}`}
           />
         </motion.div>

@@ -48,7 +48,13 @@ const PlayerCard = (props: Props) => {
 
           <div className="px-4 mb-auto">
             <div className="text-lg opacity-90 drop-shadow-md flex justify-between items-center">
-              <div>{item.name}</div>
+              <a
+                href={item.external_urls.spotify}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <div>{item.name}</div>
+              </a>
               <div onClick={props.onWaveClick}>
                 <TiWaves size={26} className="opacity-60" />
               </div>
@@ -57,7 +63,13 @@ const PlayerCard = (props: Props) => {
               className="text-sm  drop-shadow-sm"
               style={{ color: primaryColor }}
             >
-              {item.artists[0].name}
+              <a
+                href={item.artists[0].external_urls.spotify}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {item.artists[0].name}
+              </a>
             </div>
           </div>
 

@@ -14,6 +14,7 @@ export interface Song {
   track_number: number;
   type: string;
   uri: string;
+  external_urls: ExternalUrl;
 }
 
 export interface Album {
@@ -21,7 +22,7 @@ export interface Album {
   album_type: string;
   artists: Artist[];
   available_markets: string[];
-  external_urls: object;
+  external_urls: ExternalUrl;
   href: string;
   id: string;
   images: Image[];
@@ -34,7 +35,7 @@ export interface Album {
 }
 
 export interface Artist {
-  external_urls: object;
+  external_urls: ExternalUrl;
   href: string;
   id: string;
   name: string;
@@ -46,4 +47,8 @@ export interface Image {
   height: number;
   url: string;
   width: number;
+}
+
+interface ExternalUrl {
+  spotify: string;
 }
