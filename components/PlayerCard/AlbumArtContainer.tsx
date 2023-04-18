@@ -45,7 +45,7 @@ const AlbumArt = (props: Props) => {
           transition={{ ease: "easeOut" }}
         >
           <img
-            className="w-full aspect-square rounded-[28px] z-10 p-4 drop-shadow-md"
+            className="w-full aspect-square srounded-[28px] z-10 p-4 drop-shadow-md"
             src={props.imageUrl}
             onLoad={calculateColor}
             crossOrigin="anonymous"
