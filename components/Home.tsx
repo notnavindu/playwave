@@ -86,7 +86,7 @@ function Home({}: Props) {
         )}
       </AnimatePresence>
 
-      {/* <BackgroundArtwork /> */}
+      <BackgroundArtwork />
 
       <PlayerCard
         artworkState={artworkState}

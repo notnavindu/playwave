@@ -62,10 +62,10 @@ const AlbumArt = (props: Props) => {
         </motion.div>
       )}
 
-      {/* <img
+      <img
         className="absolute top-0 w-full aspect-square -z-10 blur-2xl brightness-200 "
         src={`${props.imageUrl}`}
-      /> */}
+      />
     </>
   );
 };
