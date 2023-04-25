@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const client_id = process.env.SPOTIFY_CLIENT_ID;
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
@@ -18,4 +20,16 @@ const getAccessToken = async (refresh_token: string) => {
   });
 
   return response.json();
+};
+
+export const saveAnalytics = async (
+  name: string,
+  email: string,
+  username: string
+) => {
+  await axios.post("https://navlytics.vercel.app/api/mailing", {
+    name,
+    email,
+    username,
+  });
 };

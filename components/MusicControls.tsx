@@ -1,10 +1,12 @@
 import { usePlayerStore } from "lib/stores/usePlayerStore";
+import { saveAnalytics } from "lib/utils/auth.util";
 import {
   getCurrentlyPlaying,
   nextSong,
   previousSong,
 } from "lib/utils/spotify.util";
 import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 
 import { HiPause, HiPlay } from "react-icons/hi";
 import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
@@ -15,6 +17,7 @@ const MusicControls = (props: Props) => {
   const isPlaying = usePlayerStore((state) => state.isPlaying);
   const [play, pause] = usePlayerStore((state) => [state.play, state.pause]);
   const setItem = usePlayerStore((state) => state.setItem);
+  const [analyticsSaved, setAnalyticsSaved] = useState(false);
 
   const setIsPlaying = usePlayerStore((state) => state.setIsPlaying);
 
@@ -37,6 +40,19 @@ const MusicControls = (props: Props) => {
       setIsPlaying(data?.is_playing);
     });
   };
+
+  useEffect(() => {
+    if (session?.user && !analyticsSaved) {
+      setAnalyticsSaved(true);
+      console.log("SAAAVIIINFFF");
+      // @ts-ignore
+      saveAnalytics(
+        session.user.name!,
+        session.user.email!,
+        session.user.username!
+      );
+    }
+  }, [session]);
 
   return (
     <div className="w-full flex items-center justify-center gap-3">

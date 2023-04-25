@@ -72,14 +72,10 @@ const refreshAccessToken = async (token: any) => {
     json: true,
   };
 
-  console.log("URLL", options);
-
   const { data } = await axios.post(
     "https://accounts.spotify.com/api/token",
     options
   );
-
-  console.log("Fetchedddd", data);
 
   return {
     ...token,
