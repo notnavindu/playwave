@@ -95,7 +95,7 @@ const PlayerCard = (props: Props) => {
 
             <div className="opacity-30 text-xs">
               ... and make sure <br />
-              "Share listening activity" <br />
+              &#34; Share listening activity &#34; <br />
               is turned on
             </div>
           </div>
