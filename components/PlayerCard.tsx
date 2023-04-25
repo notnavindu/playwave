@@ -87,10 +87,16 @@ const PlayerCard = (props: Props) => {
         >
           <div
             className="w-80 h-[500px] bg-white bg-opacity-5 backdrop-blur-2xl border border-white border-opacity-10
-                        flex items-center justify-center text-center text-lg"
+                        flex items-center justify-center text-center flex-col gap-8"
           >
-            <div className="opacity-50">
-              Play a song on <br /> one of your devices....
+            <div className="opacity-50 text-lg">
+              Play a song on <br /> your Spotify App...
+            </div>
+
+            <div className="opacity-30 text-xs">
+              ... and make sure <br />
+              "Share listening activity" <br />
+              is turned on
             </div>
           </div>
         </div>
